@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql
+    volumes:
+      - ./webapp/sql/01_schema.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql:/etc/mysql/conf.d
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    ports:
+      - "3306:3306"
+
+  isucari:
+    build: ./webapp/go
+    volumes:
+      - ./webapp/public:/go/public
+      - ./webapp/sql:/go/sql
+    environment:
+      - MYSQL_HOST=mysql
+    ports:
+      - "8001:8000"
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8000:8001"

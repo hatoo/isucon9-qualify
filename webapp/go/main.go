@@ -26,8 +26,8 @@ import (
 const (
 	sessionName = "session_isucari"
 
-	DefaultPaymentServiceURL  = "http://localhost:5555"
-	DefaultShipmentServiceURL = "http://localhost:7000"
+	DefaultPaymentServiceURL  = "http://172.26.4.33:5555"
+	DefaultShipmentServiceURL = "http://172.26.4.33:7000"
 
 	ItemMinPrice    = 100
 	ItemMaxPrice    = 1000000
@@ -433,19 +433,25 @@ func getConfigByName(name string) (string, error) {
 }
 
 func getPaymentServiceURL() string {
-	val, _ := getConfigByName("payment_service_url")
-	if val == "" {
-		return DefaultPaymentServiceURL
-	}
-	return val
+	/*
+		val, _ := getConfigByName("payment_service_url")
+		if val == "" {
+			return DefaultPaymentServiceURL
+		}
+		return val
+	*/
+	return DefaultPaymentServiceURL
 }
 
 func getShipmentServiceURL() string {
-	val, _ := getConfigByName("shipment_service_url")
-	if val == "" {
-		return DefaultShipmentServiceURL
-	}
-	return val
+	/*
+		val, _ := getConfigByName("shipment_service_url")
+		if val == "" {
+			return DefaultShipmentServiceURL
+		}
+		return val
+	*/
+	return DefaultShipmentServiceURL
 }
 
 func getIndex(w http.ResponseWriter, r *http.Request) {
